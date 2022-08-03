@@ -2,8 +2,12 @@
   "name": "node-syntax-tree",
   "version": "0.1.0",
   "description": "A node package for accessing Syntax Tree through WASM",
-  "main": "dist/index.js",
-  "scripts": {},
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "node test.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ruby-syntax-tree/node-syntax-tree.git"
