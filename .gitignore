@@ -1,0 +1,8 @@
+/dist
+/head-wasm32-unknown-wasi-full-js/
+/lib
+/node_modules/
+/ruby.wasm
+/src/app.wasm
+/wasi-vfs
+/yarn-error.log
