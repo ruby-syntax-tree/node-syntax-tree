@@ -1,10 +1,16 @@
-import crypto from "crypto";
 import { WASI } from "@wasmer/wasi";
 import { WasmFs } from "@wasmer/wasmfs";
-import path from "path-browserify";
 import { RubyVM } from "ruby-head-wasm-wasi/dist/index";
 
-import load from "./app.wasm";
+import { randomFillSync } from "randomfill";
+import path from "path-browserify";
+
+import app from "./app.wasm";
+
+type AppExports = {
+  _initialize: () => void;
+  memory: WebAssembly.Memory;
+};
 
 // This overwrites the default writeSync function used by the WasmFs to instead
 // pipe it out to the console.
@@ -31,7 +37,18 @@ function createWriter(originalWriter: Function) {
   }
 }
 
-export default async function createRuby() {
+type SyntaxTreeHandler = {
+  format(source: string): string;
+  parse(source: string): string;
+  read(filepath: string): string;
+};
+
+export type SyntaxTree = {
+  rubyVM: RubyVM;
+  handlers: Record<"haml" | "ruby", SyntaxTreeHandler>;
+};
+
+export default async function createSyntaxTree(): Promise<SyntaxTree> {
   // First, create a new file system that we can use internally within the Ruby
   // WASM VM.
   const wasmFs = new WasmFs();
@@ -41,12 +58,7 @@ export default async function createRuby() {
   // Next, create a new WASI instance with the correct options overridden from
   // the defaults.
   const wasi = new WASI({
-    bindings: {
-      ...WASI.defaultBindings,
-      fs: wasmFs.fs,
-      path: path,
-      randomFillSync: crypto.randomFillSync as typeof WASI.defaultBindings.randomFillSync,
-    },
+    bindings: { ...WASI.defaultBindings, fs: wasmFs.fs, path, randomFillSync },
     preopens: { "/": "/tmp" }
   });
 
@@ -57,7 +69,11 @@ export default async function createRuby() {
   rubyVM.addToImports(imports);
 
   // Set the WASI memory to use the memory for our application.
-  const instance = await load(imports);
+  const instance = await WebAssembly.instantiate(app, imports).then((result) => {
+    return result.instance as WebAssembly.Instance & { exports: AppExports };
+  });
+
+  // Make sure WASI and our web assembly instance share their memory.
   wasi.setMemory(instance.exports.memory);
 
   // Load our application into the virtual machine.
@@ -83,22 +99,43 @@ export default async function createRuby() {
 
   return {
     rubyVM,
-    formatHAML(source: string) {
-      return format(source, ".haml");
-    },
-    formatRuby(source: string) {
-      return format(source, ".rb");
-    },
-    // formatRBS(source: string) {
-    //   return format(source, ".rbs");
-    // }
+    handlers: {
+      haml: makeSyntaxTreeHandler(".haml"),
+      // rbs: makeSyntaxTreeHandler(".rbs"),
+      ruby: makeSyntaxTreeHandler(".rb")
+    }
   };
 
-  function format(source: string, kind: string) {
-    const jsonSource = JSON.stringify(JSON.stringify(source));
-    const rubySource = `SyntaxTree::HANDLERS.fetch("${kind}").format(JSON.parse(${jsonSource}))`;
-    return rubyVM.eval(rubySource).toString();
+  function makeSyntaxTreeHandler(extension: string): SyntaxTreeHandler {
+    return {
+      format(source) {
+        const jsonSource = JSON.stringify(JSON.stringify(source));
+        const rubySource = `
+          handler = SyntaxTree::HANDLERS["${extension}"]
+          handler.format(JSON.parse(${jsonSource}))
+        `;
+
+        return rubyVM.eval(rubySource).toString();
+      },
+      parse(source) {
+        const jsonSource = JSON.stringify(JSON.stringify(source));
+        const rubySource = `
+          handler = SyntaxTree::HANDLERS["${extension}"]
+          node = handler.parse(JSON.parse(${jsonSource}))
+          PP.pp(node, +"", 80)
+        `;
+
+        return rubyVM.eval(rubySource).toString();
+      },
+      read(filepath) {
+        const jsonSource = JSON.stringify(JSON.stringify(filepath));
+        const rubySource = `
+          handler = SyntaxTree::HANDLERS["${extension}"]
+          handler.read(JSON.parse(${jsonSource}))
+        `;
+
+        return rubyVM.eval(rubySource).toString();
+      }
+    };
   }
 };
-
-export type Ruby = Awaited<ReturnType<typeof createRuby>>;
