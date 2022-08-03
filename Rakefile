@@ -43,12 +43,23 @@ file "src/app.wasm" => ["Gemfile.lock", "wasi-vfs", "ruby.wasm"] do
   # require "syntax_tree/rbs"
   loaded_after = $LOADED_FEATURES - loaded_before
 
+  # Here we're going to find all of the gems that were loaded by requiring each
+  # of the gems that we wanted. We do this because dependencies can require
+  # their own dependencies recursively. Once everything is required, we can walk
+  # through the loaded gems and find the ones we need.
   filepaths = loaded_after.group_by { |filepath| filepath[%r{/gems/(.+?)-\d}, 1] }
   gem_names = filepaths.keys.tap { |names| names.delete(nil) }.sort
   puts "Gems loaded: #{gem_names.join(", ")}"
 
+  # Walk through each gem and copy all of their contents into the same lib
+  # directory. This is nice because it allows us to only have to put one
+  # directory onto the load path. It works because we're sure that all of the
+  # gems are structured such that there isn't any overlap in the filepaths.
   mkdir "lib"
   gem_names.each do |gem_name|
+    # Now that we know which gem we're attempting to load, we can find the lib
+    # directory for that gem by looking through the load path that bundler
+    # kindly set up for us.
     libdir = $:.find { _1.match?(%r{/#{gem_name}-\d}) }
 
     Dir["#{libdir}/**/*"].sort.each do |filepath|
