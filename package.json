@@ -6,6 +6,7 @@
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "build": "node build.mjs",
     "test": "node test.mjs"
   },
   "repository": {
