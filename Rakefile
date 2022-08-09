@@ -39,8 +39,12 @@ file "src/app.wasm" => ["Gemfile.lock", "wasi-vfs", "ruby.wasm"] do
 
   loaded_before = $LOADED_FEATURES.dup
   require "syntax_tree"
+  require "syntax_tree/bf"
+  require "syntax_tree/css"
   require "syntax_tree/haml"
+  require "syntax_tree/json"
   # require "syntax_tree/rbs"
+  require "syntax_tree/xml"
   loaded_after = $LOADED_FEATURES - loaded_before
 
   # Here we're going to find all of the gems that were loaded by requiring each

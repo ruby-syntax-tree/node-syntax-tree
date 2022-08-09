@@ -45,7 +45,7 @@ type SyntaxTreeHandler = {
 
 export type SyntaxTree = {
   rubyVM: RubyVM;
-  handlers: Record<"haml" | "ruby", SyntaxTreeHandler>;
+  handlers: Record<"bf" | "css" | "haml" | "json" | "ruby" | "xml", SyntaxTreeHandler>;
 };
 
 export default async function createSyntaxTree(): Promise<SyntaxTree> {
@@ -93,16 +93,24 @@ export default async function createSyntaxTree(): Promise<SyntaxTree> {
 
     $:.unshift("/lib")
     require_relative "/lib/syntax_tree"
+    require_relative "/lib/syntax_tree/bf"
+    require_relative "/lib/syntax_tree/css"
     require_relative "/lib/syntax_tree/haml"
+    require_relative "/lib/syntax_tree/json"
     # require_relative "/lib/syntax_tree/rbs"
+    require_relative "/lib/syntax_tree/xml"
   `);
 
   return {
     rubyVM,
     handlers: {
+      bf: makeSyntaxTreeHandler(".bf"),
+      css: makeSyntaxTreeHandler(".css"),
       haml: makeSyntaxTreeHandler(".haml"),
+      json: makeSyntaxTreeHandler(".json"),
+      ruby: makeSyntaxTreeHandler(".rb"),
       // rbs: makeSyntaxTreeHandler(".rbs"),
-      ruby: makeSyntaxTreeHandler(".rb")
+      xml: makeSyntaxTreeHandler(".xml")
     }
   };
 

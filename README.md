@@ -48,6 +48,8 @@ createSyntaxTree().then((syntaxTree) => {
 });
 ```
 
+You can access all of the various Syntax Tree plugins except RBS.
+
 TypeScript types are provided along with this package, and effectively boil down to:
 
 ```ts
@@ -58,7 +60,7 @@ type SyntaxTreeHandler = {
 };
 
 type SyntaxTree = {
-  handlers: Record<"haml" | "ruby", SyntaxTreeHandler>
+  handlers: Record<"bf" | "css" | "haml" | "json" | "ruby" | "xml", SyntaxTreeHandler>
 };
 
 function createSyntaxTree(): Promise<SyntaxTree>;

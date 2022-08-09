@@ -9,13 +9,25 @@ GEM
     rbs (2.6.0)
     syntax_tree (3.3.0)
       prettier_print
+    syntax_tree-bf (0.1.0)
+      prettier_print
+      syntax_tree (>= 2.0.1)
+    syntax_tree-css (0.1.0)
+      prettier_print
+      syntax_tree (>= 2.0.1)
     syntax_tree-haml (1.3.1)
       haml (>= 5.2)
+      prettier_print
+      syntax_tree (>= 2.0.1)
+    syntax_tree-json (0.3.0)
       prettier_print
       syntax_tree (>= 2.0.1)
     syntax_tree-rbs (0.5.0)
       prettier_print
       rbs
+      syntax_tree (>= 2.0.1)
+    syntax_tree-xml (0.1.0)
+      prettier_print
       syntax_tree (>= 2.0.1)
     temple (0.8.2)
     tilt (2.0.11)
@@ -28,8 +40,12 @@ DEPENDENCIES
   bundler
   rake
   syntax_tree
+  syntax_tree-bf
+  syntax_tree-css
   syntax_tree-haml
+  syntax_tree-json
   syntax_tree-rbs
+  syntax_tree-xml
 
 BUNDLED WITH
    2.3.14

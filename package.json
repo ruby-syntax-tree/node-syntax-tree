@@ -1,6 +1,6 @@
 {
   "name": "node-syntax-tree",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A node package for accessing Syntax Tree through WASM",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "build": "yarn prepublishOnly",
     "prepublishOnly": "node build.mjs",
     "test": "node test.mjs"
   },
