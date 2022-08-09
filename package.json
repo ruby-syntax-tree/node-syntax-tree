@@ -5,6 +5,9 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "node build.mjs",
     "test": "node test.mjs"
