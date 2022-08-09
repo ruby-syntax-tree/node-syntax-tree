@@ -50,7 +50,7 @@ createSyntaxTree().then((syntaxTree) => {
 
 TypeScript types are provided along with this package, and effectively boil down to:
 
-```js
+```ts
 type SyntaxTreeHandler = {
     format(source: string): string;
     parse(source: string): string;
@@ -71,25 +71,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/ruby-s
 ## License
 
 The package is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-
-import { RubyVM } from "ruby-head-wasm-wasi/dist/index";
-declare type SyntaxTreeHandler = {
-    format(source: string): string;
-    parse(source: string): string;
-    read(filepath: string): string;
-};
-export declare type SyntaxTree = {
-    rubyVM: RubyVM;
-    handlers: Record<"haml" | "ruby", SyntaxTreeHandler>;
-};
-export default function createSyntaxTree(): Promise<SyntaxTree>;
-export {};
-
-
-test("handlers.haml.parse", () => {
-  assert.equal(
-    syntaxTree.handlers.haml.parse("= foo"),
-    `(root children=[(script text=" foo")])\n`
-  );
-});
