@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "node build.mjs",
+    "prepublishOnly": "node build.mjs",
     "test": "node test.mjs"
   },
   "repository": {
