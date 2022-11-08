@@ -267,10 +267,10 @@ readable-stream@^3.1.1, readable-stream@^3.4.0:
     string_decoder "^1.1.1"
     util-deprecate "^1.0.1"
 
-ruby-head-wasm-wasi@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-0.3.0.tgz#fcf9f07e34f8a48944bd5072ce92aebcce61f31a"
-  integrity sha512-6EiZxeGZs8V7qPP7JhLxsg7e/Vmy3O4upQs8PcvMesXuH5r0XV0DIN6QII7Gd/5ot39tLL5VqAbi0zSefjaa7Q==
+ruby-head-wasm-wasi@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-0.4.0.tgz#8db3421a8ea494b280e66a2d498c2aac2857214d"
+  integrity sha512-XyOCAgqiLTGssvCs922uNn5qeJN+XW93Q5Z33C9B0Ey4Ab8B2OGjt2FaXn1+FYaNZDmuWDclOj5uY2aIvupSHg==
 
 safe-buffer@^5.1.0, safe-buffer@~5.2.0:
   version "5.2.1"
