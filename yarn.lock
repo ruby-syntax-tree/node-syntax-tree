@@ -23,9 +23,9 @@
   integrity sha512-XMCcyhSvxcch8b7rZAtFAaierBYdeHXVvg2iYnxOV0MCQHmPuRRmGZPFDRzPayxcGiiSL1Te9UIO+f3cuj0tfw==
 
 "@wasmer/wasi@^1.1.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@wasmer/wasi/-/wasi-1.2.0.tgz#2ab6cd18708cb77e86ecb530ae52d6957c0f9055"
-  integrity sha512-Hxg/By00+nTWbEgj7qIfodCjU/N1k6H1yTLuSyp0x1KV6OK1AVTMGZAMcW/qOajToCkEVxYjw0BCW4mf5iPoyA==
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@wasmer/wasi/-/wasi-1.2.2.tgz#46689b568100ad3923fb1bee0205ccb01f9c5b80"
+  integrity sha512-39ZB3gefOVhBmkhf7Ta79RRSV/emIV8LhdvcWhP/MOZEjMmtzoZWMzt7phdKj8CUXOze+AwbvGK60lKaKldn1w==
 
 "@wasmer/wasmfs@^0.12.0":
   version "0.12.0"
