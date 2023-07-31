@@ -112,6 +112,13 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.18.17.tgz#bcb2e042631b3c15792058e189ed879a22b2968b"
   integrity sha512-fGEb8f2BSA3CW7riJVurug65ACLuQAzKq0SSqkY2b2yHHH0MzDfbLyKIGzHwOI/gkHcxM/leuSW6D5w/LMNitA==
 
+"@ruby/wasm-wasi@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ruby/wasm-wasi/-/wasm-wasi-2.1.0.tgz#c372ee9aa4c670c2be049ca5b89c6aa86191a2b7"
+  integrity sha512-0XlKcAEJhfzQsCifqNtDdICoPza5MEcSSKjINjtObY4BYumvOZ3qrLmn2uSixkhnPpl4cIt/EBw9KlXdbz5FBg==
+  dependencies:
+    tslib "^2.3.1"
+
 "@types/node@^20.1.0":
   version "20.4.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.5.tgz#9dc0a5cb1ccce4f7a731660935ab70b9c00a5d69"
@@ -268,9 +275,11 @@ readable-stream@^3.1.1, readable-stream@^3.4.0:
     util-deprecate "^1.0.1"
 
 ruby-head-wasm-wasi@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-2.0.0.tgz#a432cf98e6ff3207e9d4cba9552aa2b1edfc408f"
-  integrity sha512-f70Qi9DFcXJv66VJlLZJuSr0Qv/LVv9gJJcXEMXB+Af2g/uThKLNQqvxOCiAcaHmfv0vl/f+60eEaHJ7TvWk3g==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-2.1.0.tgz#21d754287c429c444cb1e2abe1dda37213cc57b5"
+  integrity sha512-WIEuSSTTJHyO0040fbX9eUw4QQ92RYarPfaIHG7SukDCHtUNYbwzRNhtoUmKWnXepVjWURFypB3iNnKaHu5Lpg==
+  dependencies:
+    "@ruby/wasm-wasi" "^2.0.0"
 
 safe-buffer@^5.1.0, safe-buffer@~5.2.0:
   version "5.2.1"
@@ -294,6 +303,11 @@ tar-stream@^2.1.0:
     fs-constants "^1.0.0"
     inherits "^2.0.3"
     readable-stream "^3.1.1"
+
+tslib@^2.3.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.1.tgz#fd8c9a0ff42590b25703c0acb3de3d3f4ede0410"
+  integrity sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==
 
 typescript@^5.0.2:
   version "5.1.6"
