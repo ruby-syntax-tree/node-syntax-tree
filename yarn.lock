@@ -277,9 +277,9 @@ readable-stream@^3.1.1, readable-stream@^3.4.0:
     util-deprecate "^1.0.1"
 
 ruby-head-wasm-wasi@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-2.1.0.tgz#21d754287c429c444cb1e2abe1dda37213cc57b5"
-  integrity sha512-WIEuSSTTJHyO0040fbX9eUw4QQ92RYarPfaIHG7SukDCHtUNYbwzRNhtoUmKWnXepVjWURFypB3iNnKaHu5Lpg==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ruby-head-wasm-wasi/-/ruby-head-wasm-wasi-2.2.0.tgz#02c9258376a2339eaf03f72e5ccd3b2406bbf3a1"
+  integrity sha512-tZYt/yY2ngWyhhtuJXuM56cDJnfoA+NmKBZWeFipvdF87jbprrRMSTZMt+X6ADB4bsXyYquMcdGv/INUhwoxPA==
   dependencies:
     "@ruby/wasm-wasi" "^2.0.0"
 
